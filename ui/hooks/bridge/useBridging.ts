@@ -61,6 +61,13 @@ const useBridging = () => {
       isBridgeSupported &&
       providerConfig &&
       dispatch(setFromChain(providerConfig.chainId));
+  }, [providerConfig?.chainId, isBridgeChain, isBridgeSupported]);
+
+  useEffect(() => {
+    isBridgeChain &&
+      isBridgeSupported &&
+      providerConfig?.chainId &&
+      dispatch(setFromChain(providerConfig.chainId));
 
     return () => {
       dispatch(resetInputFields());
