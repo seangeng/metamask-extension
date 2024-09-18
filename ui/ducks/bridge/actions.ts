@@ -23,29 +23,14 @@ import { bridgeSlice } from './bridge';
 
 const {
   setToChainId: setToChainId_,
-<<<<<<< HEAD
-  setFromToken,
-  setToToken,
-  setFromTokenInputValue,
-  resetInputFields,
-  switchToAndFromTokens,
-} = bridgeSlice.actions;
-
-export {
-  setFromToken,
-  setToToken,
-  setFromTokenInputValue,
-  switchToAndFromTokens,
-  resetInputFields,
-=======
   setFromToken: setFromToken_,
   setToToken: setToToken_,
   setFromTokenInputValue: setFromTokenInputValue_,
-  resetInputFields: resetInputFields_,
-  switchToAndFromTokens,
+  resetInputFields,
+  switchToAndFromInputs: switchToAndFromInputs_,
 } = bridgeSlice.actions;
 
-export { switchToAndFromTokens };
+export { resetInputFields };
 
 const updateQuoteRequestParams = <T extends Partial<QuoteRequest>>(
   params: T,
@@ -56,7 +41,6 @@ const updateQuoteRequestParams = <T extends Partial<QuoteRequest>>(
     ]);
     await forceUpdateMetamaskState(dispatch);
   };
->>>>>>> 16b712381d (feat: update bridge quote params on input change and display quotes)
 };
 
 const callBridgeControllerMethod = <T extends string>(
@@ -107,7 +91,7 @@ export const setToToken = (
     dispatch(setToToken_(payload));
     dispatch(
       updateQuoteRequestParams<Pick<QuoteRequest, 'destTokenAddress'>>({
-        destTokenAddress: payload.address ?? '',
+        destTokenAddress: payload.address ?? zeroAddress(),
       }),
     );
   };
@@ -152,3 +136,11 @@ export const setToChain = (chainId: Hex) => {
     );
   };
 };
+
+export const switchToAndFromInputs =
+  (fromChainId: Hex) => async (dispatch: MetaMaskReduxDispatch) => {
+    dispatch(switchToAndFromInputs_(fromChainId));
+    dispatch(
+      callBridgeControllerMethod(BridgeUserAction.SWITCH_TO_AND_FROM_INPUTS),
+    );
+  };
