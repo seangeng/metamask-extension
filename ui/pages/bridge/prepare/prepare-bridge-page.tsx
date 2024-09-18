@@ -2,21 +2,20 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import classnames from 'classnames';
 import {
-  setFromChain,
   setFromToken,
   setFromTokenInputValue,
   setToChain,
   setToToken,
-  switchToAndFromTokens,
+  switchToAndFromInputs,
 } from '../../../ducks/bridge/actions';
 import {
-  getBridgeQuotes,
   getFromAmount,
   getFromChain,
   getFromChains,
   getFromToken,
   getFromTokens,
   getFromTopAssets,
+  getQuoteRequest,
   getToAmount,
   getToChain,
   getToChains,
@@ -38,6 +37,7 @@ import { useI18nContext } from '../../../hooks/useI18nContext';
 import { TokenBucketPriority } from '../../../../shared/constants/swaps';
 import { useTokensWithFiltering } from '../../../hooks/useTokensWithFiltering';
 import { setActiveNetwork } from '../../../store/actions';
+import { BridgeQuoteCard } from '../quotes/bridge-quote-card';
 import { BridgeInputGroup } from './bridge-input-group';
 
 const PrepareBridgePage = () => {
@@ -61,7 +61,7 @@ const PrepareBridgePage = () => {
   const fromAmount = useSelector(getFromAmount);
   const toAmount = useSelector(getToAmount);
 
-  const quotes = useSelector(getBridgeQuotes);
+  const { isValid: isQuoteRequestValid } = useSelector(getQuoteRequest);
 
   const fromTokenListGenerator = useTokensWithFiltering(
     fromTokens,
@@ -82,7 +82,7 @@ const PrepareBridgePage = () => {
     <div className="prepare-bridge-page">
       <Box className="prepare-bridge-page__content">
         <BridgeInputGroup
-          className="prepare-bridge-page__from"
+          className="bridge-box"
           header={t('bridgeFrom')}
           token={fromToken}
           onAmountChange={(e) => {
@@ -130,7 +130,7 @@ const PrepareBridgePage = () => {
             data-testid="switch-tokens"
             ariaLabel="switch-tokens"
             iconName={IconName.Arrow2Down}
-            disabled={toChain === null}
+            disabled={!isQuoteRequestValid}
             onClick={() => {
               setRotateSwitchTokens(!rotateSwitchTokens);
               const toChainClientId =
@@ -145,7 +145,7 @@ const PrepareBridgePage = () => {
         </Box>
 
         <BridgeInputGroup
-          className="prepare-bridge-page__to"
+          className="bridge-box"
           header={t('bridgeTo')}
           token={toToken}
           onAssetChange={(token) => dispatch(setToToken(token))}
@@ -165,17 +165,13 @@ const PrepareBridgePage = () => {
             testId: 'to-amount',
             readOnly: true,
             disabled: true,
-            value: toAmount,
+            value: toAmount ?? '0',
+            className: toAmount ? 'amount-input defined' : 'amount-input',
           }}
         />
       </Box>
-      <Box
-        className="bridge-quotes-container"
-        display={Display.Flex}
-        alignItems={AlignItems.center}
-      >
-        {JSON.stringify(quotes).slice(6, 10)}
-      </Box>
+
+      <BridgeQuoteCard />
     </div>
   );
 };
