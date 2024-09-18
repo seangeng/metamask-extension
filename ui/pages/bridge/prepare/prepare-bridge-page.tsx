@@ -28,11 +28,7 @@ import {
   ButtonIcon,
   IconName,
 } from '../../../components/component-library';
-import {
-  AlignItems,
-  Display,
-  BlockSize,
-} from '../../../helpers/constants/design-system';
+import { BlockSize } from '../../../helpers/constants/design-system';
 import { useI18nContext } from '../../../hooks/useI18nContext';
 import { TokenBucketPriority } from '../../../../shared/constants/swaps';
 import { useTokensWithFiltering } from '../../../hooks/useTokensWithFiltering';
@@ -139,7 +135,8 @@ const PrepareBridgePage = () => {
                       .networkClientId
                   : undefined;
               toChainClientId && dispatch(setActiveNetwork(toChainClientId));
-              dispatch(switchToAndFromTokens({ fromChain }));
+              fromChain?.chainId &&
+                dispatch(switchToAndFromInputs(fromChain?.chainId));
             }}
           />
         </Box>
