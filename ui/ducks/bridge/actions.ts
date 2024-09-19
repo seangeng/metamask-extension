@@ -84,7 +84,6 @@ export const setToChain = (chainId: Hex) => {
 
 export const signBridgeTransaction = (
   history: ReturnType<typeof useHistory>,
-  trackEvent: UITrackEventMethod,
 ) => {
   return async (
     dispatch: MetaMaskReduxDispatch,
