@@ -5247,10 +5247,6 @@
   "swapAreYouStillThereDescription": {
     "message": "Estamos listos para mostrarle las últimas cotizaciones cuando desee continuar"
   },
-  "swapBuildQuotePlaceHolderText": {
-    "message": "No hay tokens disponibles que coincidan con $1",
-    "description": "Tells the user that a given search string does not match any tokens in our token lists. $1 can be any string of text"
-  },
   "swapConfirmWithHwWallet": {
     "message": "Confirmar con su monedero físico"
   },
@@ -5314,9 +5310,6 @@
   },
   "swapFetchingQuotesErrorTitle": {
     "message": "Error al capturar cotizaciones"
-  },
-  "swapFetchingTokens": {
-    "message": "Capturando tokens…"
   },
   "swapFromTo": {
     "message": "El intercambio de $1 por $2",
@@ -5444,9 +5437,6 @@
   },
   "swapRequestForQuotation": {
     "message": "Solicitud de cotización"
-  },
-  "swapSearchNameOrAddress": {
-    "message": "Buscar nombre o pegar dirección"
   },
   "swapSelect": {
     "message": "Seleccionar"

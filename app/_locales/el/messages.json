@@ -5250,10 +5250,6 @@
   "swapAreYouStillThereDescription": {
     "message": "Είμαστε έτοιμοι να σας δείξουμε τις τελευταίες προσφορές, όποτε θέλετε να συνεχίσετε"
   },
-  "swapBuildQuotePlaceHolderText": {
-    "message": "Δεν υπάρχουν διαθέσιμα tokens που να αντιστοιχούν σε $1",
-    "description": "Tells the user that a given search string does not match any tokens in our token lists. $1 can be any string of text"
-  },
   "swapConfirmWithHwWallet": {
     "message": "Επιβεβαιώστε με το πορτοφόλι υλικού σας"
   },
@@ -5317,9 +5313,6 @@
   },
   "swapFetchingQuotesErrorTitle": {
     "message": "Σφάλμα κατά τη λήψη προσφορών"
-  },
-  "swapFetchingTokens": {
-    "message": "Λήψη tokens..."
   },
   "swapFromTo": {
     "message": "Η ανταλλαγή από $1 έως $2",
@@ -5447,9 +5440,6 @@
   },
   "swapRequestForQuotation": {
     "message": "Αίτημα για προσφορά"
-  },
-  "swapSearchNameOrAddress": {
-    "message": "Αναζήτηση ονόματος ή επικόλληση διεύθυνσης"
   },
   "swapSelect": {
     "message": "Επιλογή"

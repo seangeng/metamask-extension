@@ -5250,10 +5250,6 @@
   "swapAreYouStillThereDescription": {
     "message": "Chúng tôi sẵn sàng cho bạn xem báo giá mới nhất khi bạn muốn tiếp tục"
   },
-  "swapBuildQuotePlaceHolderText": {
-    "message": "Không có token nào khớp với $1",
-    "description": "Tells the user that a given search string does not match any tokens in our token lists. $1 can be any string of text"
-  },
   "swapConfirmWithHwWallet": {
     "message": "Xác nhận ví cứng của bạn"
   },
@@ -5317,9 +5313,6 @@
   },
   "swapFetchingQuotesErrorTitle": {
     "message": "Lỗi tìm nạp báo giá"
-  },
-  "swapFetchingTokens": {
-    "message": "Đang tìm nạp token..."
   },
   "swapFromTo": {
     "message": "Giao dịch hoán đổi $1 sang $2",
@@ -5447,9 +5440,6 @@
   },
   "swapRequestForQuotation": {
     "message": "Yêu cầu báo giá"
-  },
-  "swapSearchNameOrAddress": {
-    "message": "Tìm kiếm tên hoặc dán địa chỉ"
   },
   "swapSelect": {
     "message": "Chọn"

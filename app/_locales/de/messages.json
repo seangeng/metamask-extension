@@ -5250,10 +5250,6 @@
   "swapAreYouStillThereDescription": {
     "message": "Wir sind bereit, Ihnen die neuesten Angebote zu zeigen, wenn Sie fortfahren möchten."
   },
-  "swapBuildQuotePlaceHolderText": {
-    "message": "Keine Tokens verfügbar, die mit $1 übereinstimmen.",
-    "description": "Tells the user that a given search string does not match any tokens in our token lists. $1 can be any string of text"
-  },
   "swapConfirmWithHwWallet": {
     "message": "Mit Ihrer Hardware-Wallet bestätigen"
   },
@@ -5317,9 +5313,6 @@
   },
   "swapFetchingQuotesErrorTitle": {
     "message": "Fehler beim Abrufen der Preisangaben"
-  },
-  "swapFetchingTokens": {
-    "message": "Token abrufen..."
   },
   "swapFromTo": {
     "message": "Swap von $1 auf $2",
@@ -5447,9 +5440,6 @@
   },
   "swapRequestForQuotation": {
     "message": "Angebotsanfrage"
-  },
-  "swapSearchNameOrAddress": {
-    "message": "Namen suchen oder Adresse einfügen"
   },
   "swapSelect": {
     "message": "Auswählen"
