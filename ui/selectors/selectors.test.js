@@ -40,9 +40,9 @@ const modifyStateWithHWKeyring = (keyring) => {
 };
 
 const mockAccountsState = (accounts) => {
-  const accountsMap = accounts.reduce((accountsMap, account) => {
-    accountsMap[account.id] = account;
-    return accountsMap;
+  const accountsMap = accounts.reduce((map, account) => {
+    map[account.id] = account;
+    return map;
   }, {});
 
   return {
@@ -2068,17 +2068,25 @@ describe('#getConnectedSitesList', () => {
 
     it('only returns EVM accounts with only EVM accounts', () => {
       const state = mockAccountsState(evmAccounts);
-      expect(selectors.getEvmInternalAccounts(state)).toEqual(evmAccounts);
+      expect(selectors.getEvmInternalAccounts(state)).toStrictEqual(
+        evmAccounts,
+      );
     });
 
     it('only returns EVM accounts when there is non-EVM accounts', () => {
-      const state = mockAccountsState([...evmAccounts, nonEvmAccount1, nonEvmAccount2]);
-      expect(selectors.getEvmInternalAccounts(state)).toEqual(evmAccounts);
+      const state = mockAccountsState([
+        ...evmAccounts,
+        nonEvmAccount1,
+        nonEvmAccount2,
+      ]);
+      expect(selectors.getEvmInternalAccounts(state)).toStrictEqual(
+        evmAccounts,
+      );
     });
 
     it('returns an empty array when there is no EVM accounts', () => {
       const state = mockAccountsState([nonEvmAccount1, nonEvmAccount2]);
-      expect(selectors.getEvmInternalAccounts(state)).toEqual([]);
+      expect(selectors.getEvmInternalAccounts(state)).toStrictEqual([]);
     });
   });
 
@@ -2109,7 +2117,13 @@ describe('#getConnectedSitesList', () => {
     });
 
     it('returns the last selected EVM account even with non-EVM accounts', () => {
-      const state = mockAccountsState([account1, account2, account3, nonEvmAccount1, nonEvmAccount2]);
+      const state = mockAccountsState([
+        account1,
+        account2,
+        account3,
+        nonEvmAccount1,
+        nonEvmAccount2,
+      ]);
       expect(selectors.getSelectedEvmInternalAccount(state)).toBe(account3);
     });
 
