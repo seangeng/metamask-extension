@@ -1328,12 +1328,6 @@
   "swapGasFeesSplit": {
     "message": "Hahatiin sa pagitan ng dalawang transaksyon na ito ang mga bayarin sa gas sa nakaraang screen."
   },
-  "swapHighSlippageWarning": {
-    "message": "Sobrang laki ng halaga ng slippage."
-  },
-  "swapLowSlippageError": {
-    "message": "Posibleng hindi magtagumpay ang transaksyon, masyadong mababa ang max na slippage."
-  },
   "swapMaxSlippage": {
     "message": "Max na slippage"
   },
@@ -1452,12 +1446,6 @@
   },
   "swapZeroSlippage": {
     "message": "0% Slippage"
-  },
-  "swapsAdvancedOptions": {
-    "message": "Mga Advanced na Opsyon"
-  },
-  "swapsExcessiveSlippageWarning": {
-    "message": "Masyadong mataas ang halaga ng slippage at magreresulta ito sa masamang rating. Pakibabaan ang iyong tolerance ng slippage sa value na mas mababa sa 15%."
   },
   "swapsMaxSlippage": {
     "message": "Tolerance ng Slippage"
