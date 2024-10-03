@@ -1,8 +1,9 @@
 import React, { useState, useCallback, ReactElement } from 'react';
-import { ButtonVariant } from '@metamask/snaps-sdk';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Box,
   Button,
+  ButtonVariant,
   Icon,
   IconName,
   IconSize,
@@ -16,8 +17,23 @@ import {
   JustifyContent,
 } from '../../../helpers/constants/design-system';
 import { trace, TraceName } from '../../../../shared/lib/trace';
+import { ButtonSize } from '../../../components/component-library/button/button.types';
 
-export function SentryTest() {
+import {
+  forceUpdateMetamaskState,
+  setCurrentLocale,
+} from '../../../store/actions';
+import { FALLBACK_LOCALE, fetchLocale } from '../../../../shared/modules/i18n';
+import { getCurrentLocale } from '../../../ducks/locale/locale';
+
+function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+const SentryTest = () => {
+  const currentLocale: string =
+    useSelector(getCurrentLocale) || FALLBACK_LOCALE;
+
   return (
     <>
       <Text className="settings-page__security-tab-sub-header__bold">
@@ -27,10 +43,11 @@ export function SentryTest() {
         <GenerateUIError />
         <GenerateBackgroundError />
         <GenerateTrace />
+        <GeneratePageCrash currentLocale={currentLocale} />
       </div>
     </>
   );
-}
+};
 
 function GenerateUIError() {
   const handleClick = useCallback(async () => {
@@ -115,6 +132,36 @@ function GenerateTrace() {
   );
 }
 
+function GeneratePageCrash({ currentLocale }: { currentLocale: string }) {
+  const dispatch = useDispatch();
+  const handleClick = async () => {
+    console.log({ currentLocale });
+    const localeMessages = await fetchLocale('en');
+    await dispatch(
+      setCurrentLocale('en', {
+        ...localeMessages,
+        // @ts-expect-error - remove a language string in this page to trigger a page crash
+        developerOptions: undefined,
+      }),
+    );
+    await forceUpdateMetamaskState(dispatch);
+  };
+
+  return (
+    <TestButton
+      name="Generate A Page Crash"
+      description={
+        <span>
+          Trigger the crash on extension to send user feedback to sentry. You
+          can click "Try again" to reload extension
+        </span>
+      }
+      onClick={handleClick}
+      expectError
+    />
+  );
+}
+
 function TestButton({
   name,
   description,
@@ -155,7 +202,11 @@ function TestButton({
         <div className="settings-page__content-description">{description}</div>
       </div>
       <div className="settings-page__content-item-col">
-        <Button variant={ButtonVariant.Primary} onClick={handleClick}>
+        <Button
+          variant={ButtonVariant.Primary}
+          onClick={handleClick}
+          size={ButtonSize.Lg}
+        >
           {name}
         </Button>
       </div>
@@ -180,6 +231,4 @@ function TestButton({
   );
 }
 
-function sleep(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
+export default SentryTest;
