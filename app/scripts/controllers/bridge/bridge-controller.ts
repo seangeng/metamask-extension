@@ -105,12 +105,17 @@ export default class BridgeController extends StaticIntervalPollingController<
       ...paramsToUpdate,
     };
 
+    const { quotes, quotesLastFetched, quotesLoadingStatus } =
+      DEFAULT_BRIDGE_CONTROLLER_STATE;
     this.update((_state) => {
       _state.bridgeState = {
         ...bridgeState,
         quoteRequest: {
           ...updatedQuoteRequest,
         },
+        quotes,
+        quotesLastFetched,
+        quotesLoadingStatus,
       };
     });
 
