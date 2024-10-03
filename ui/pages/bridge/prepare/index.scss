@@ -15,12 +15,13 @@
   &__content {
     display: flex;
     flex-direction: column;
-    padding: 16px 0px 16px 0px;
+    padding: 16px 0 16px 0;
     border-radius: 8px;
     border: 1px solid var(--color-border-muted);
   }
 
-  &__from, &__to {
+  &__from,
+  &__to {
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -66,7 +67,8 @@
     justify-content: space-between;
     width: 298px;
 
-    p, span {
+    p,
+    span {
       color: var(--color-text-alternative);
       font-size: 12px;
     }
@@ -102,17 +104,18 @@
 
     input {
       text-align: right;
-      padding-right: 0px;
+      padding-right: 0;
       font-size: 24px;
       font-weight: 700;
 
-      &:focus, &:focus-visible {
+      &:focus,
+      &:focus-visible {
         outline: none;
       }
     }
 
     .mm-text-field--focused {
-      outline: none
+      outline: none;
     }
   }
 
@@ -121,7 +124,8 @@
     justify-content: center;
     align-items: center;
 
-    &::before, &::after {
+    &::before,
+    &::after {
       content: '';
       border-top: 1px solid var(--color-border-muted);
       flex-grow: 1;
