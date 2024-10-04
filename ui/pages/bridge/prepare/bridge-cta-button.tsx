@@ -11,7 +11,7 @@ import {
   getToToken,
 } from '../../../ducks/bridge/selectors';
 import { useI18nContext } from '../../../hooks/useI18nContext';
-import { signBridgeTransaction } from '../../../ducks/bridge/actions';
+import { submitBridgeTransaction } from '../../../ducks/bridge/actions';
 
 export const BridgeCTAButton = () => {
   const dispatch = useDispatch();
@@ -43,7 +43,7 @@ export const BridgeCTAButton = () => {
       onClick={() => {
         // if (isTxSubmittable) {
         console.log('bridge CTA button clicked');
-        dispatch(signBridgeTransaction(history));
+        dispatch(submitBridgeTransaction(history));
         // }
       }}
       // disabled={!isTxSubmittable}
