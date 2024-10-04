@@ -1,17 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { zeroAddress } from 'ethereumjs-util';
-import { Web3Provider } from '@ethersproject/providers';
 import { Hex } from '@metamask/utils';
 import { Numeric } from '../../../shared/modules/Numeric';
 import { DEFAULT_PRECISION } from '../useCurrencyDisplay';
-import { fetchTokenBalance } from '../../../shared/lib/token-util';
 import {
   getCurrentChainId,
   getSelectedInternalAccount,
   SwapsEthToken,
 } from '../../selectors';
 import { SwapsTokenObject } from '../../../shared/constants/swaps';
+import { calcLatestSrcBalance } from '../../../shared/modules/bridge-utils/balance';
 
 /**
  * Custom hook to fetch and format the latest balance of a given token or native asset.
@@ -30,25 +28,26 @@ const useLatestBalance = (
   const [latestBalance, setLatestBalance] = useState<string>('0');
 
   useEffect(() => {
-    if (token && chainId && currentChainId === chainId) {
-      if (!token.address || token.address === zeroAddress()) {
-        const ethersProvider = new Web3Provider(global.ethereumProvider);
-        ethersProvider.getBalance(selectedAddress).then((balance) => {
-          setLatestBalance(balance.toString());
-        });
-      } else {
-        fetchTokenBalance(
-          token.address,
-          selectedAddress,
-          global.ethereumProvider,
-        ).then((balance) => {
-          setLatestBalance(balance.toString());
-        });
-      }
+    if (token?.address && chainId && currentChainId === chainId) {
+      calcLatestSrcBalance(
+        global.ethereumProvider,
+        selectedAddress,
+        token.address,
+        chainId,
+      )?.then((balance?: Numeric) =>
+        setLatestBalance(balance?.toString() ?? '0'),
+      );
+    } else {
+      // TODO implement fetching balance on non-active chain
+      setLatestBalance('0');
     }
-    // TODO implement fetching balance on non-active chain
-    setLatestBalance('0');
-  }, [token, selectedAddress, global.ethereumProvider]);
+  }, [
+    chainId,
+    currentChainId,
+    token,
+    selectedAddress,
+    global.ethereumProvider,
+  ]);
 
   return {
     formattedBalance: token
