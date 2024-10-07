@@ -1,5 +1,4 @@
 import React, { Dispatch, SetStateAction } from 'react';
-import { useSelector } from 'react-redux';
 import { TransactionMeta } from '@metamask/transaction-controller';
 import { Box, Text } from '../../../../../../../components/component-library';
 import {
@@ -11,7 +10,6 @@ import {
   TextColor,
 } from '../../../../../../../helpers/constants/design-system';
 import { useI18nContext } from '../../../../../../../hooks/useI18nContext';
-import { getPreferences } from '../../../../../../../selectors';
 import { useConfirmContext } from '../../../../../context/confirm';
 import { EditGasIconButton } from '../edit-gas-icon/edit-gas-icon-button';
 import { ConfirmInfoAlertRow } from '../../../../../../../components/app/confirm/info/row/alert-row/alert-row';
@@ -30,12 +28,8 @@ export const EditGasFeesRow = ({
 }) => {
   const t = useI18nContext();
 
-  const { useNativeCurrencyAsPrimaryCurrency: isNativeCurrencyUsed } =
-    useSelector(getPreferences);
-
-  const { currentConfirmation: transactionMeta } = useConfirmContext() as {
-    currentConfirmation: TransactionMeta;
-  };
+  const { currentConfirmation: transactionMeta } =
+    useConfirmContext<TransactionMeta>();
 
   return (
     <ConfirmInfoAlertRow
@@ -57,14 +51,14 @@ export const EditGasFeesRow = ({
           color={TextColor.textDefault}
           data-testid="first-gas-field"
         >
-          {isNativeCurrencyUsed ? nativeFee : fiatFee}
+          {nativeFee}
         </Text>
         <Text
           marginRight={2}
           color={TextColor.textAlternative}
           data-testid="native-currency"
         >
-          {isNativeCurrencyUsed ? fiatFee : nativeFee}
+          {fiatFee}
         </Text>
         <EditGasIconButton
           supportsEIP1559={supportsEIP1559}
