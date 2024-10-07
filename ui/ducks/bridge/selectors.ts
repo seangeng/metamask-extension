@@ -20,7 +20,7 @@ import { createDeepEqualSelector } from '../../selectors/util';
 import { getProviderConfig } from '../metamask/metamask';
 import { SwapsTokenObject } from '../../../shared/constants/swaps';
 import { BridgeState } from './bridge';
-import { DUMMY_QUOTES_APPROVAL } from './dummy-quotes.test';
+import { DUMMY_QUOTES_APPROVAL } from './dummy-quotes';
 
 export type BridgeAppState = {
   metamask: NetworkState & { bridgeState: BridgeControllerState } & {
