@@ -5464,9 +5464,6 @@
   "swapSlippageLowTitle": {
     "message": "Deslizamiento bajo"
   },
-  "swapSlippageNegative": {
-    "message": "El deslizamiento debe ser mayor o igual que cero"
-  },
   "swapSlippageNegativeDescription": {
     "message": "El deslizamiento debe ser mayor o igual que cero"
   },

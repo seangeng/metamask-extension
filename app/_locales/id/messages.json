@@ -5467,9 +5467,6 @@
   "swapSlippageLowTitle": {
     "message": "Selip rendah"
   },
-  "swapSlippageNegative": {
-    "message": "Selip harus lebih besar atau sama dengan nol"
-  },
   "swapSlippageNegativeDescription": {
     "message": "Selip harus lebih besar atau sama dengan nol"
   },
