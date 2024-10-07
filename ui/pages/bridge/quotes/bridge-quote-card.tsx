@@ -6,20 +6,19 @@ import {
   ButtonVariant,
   Text,
 } from '../../../components/component-library';
-import {
-  getBridgeQuotes,
-  getRecommendedQuote,
-} from '../../../ducks/bridge/selectors';
+import { getBridgeQuotes } from '../../../ducks/bridge/selectors';
 import { useI18nContext } from '../../../hooks/useI18nContext';
 import { getQuoteDisplayData } from '../utils/quote';
 import { useCountdownTimer } from '../../../hooks/bridge/useCountdownTimer';
 import MascotBackgroundAnimation from '../../swaps/mascot-background-animation/mascot-background-animation';
 import { QuoteInfoRow } from './quote-info-row';
 import { BridgeQuotesModal } from './bridge-quotes-modal';
+import useBridgeQuotes from '../../../hooks/bridge/useBridgeQuotes';
 
 export const BridgeQuoteCard = () => {
   const t = useI18nContext();
-  const recommendedQuote = useSelector(getRecommendedQuote);
+  const { recommendedQuote } = useBridgeQuotes();
+
   const { isLoading } = useSelector(getBridgeQuotes);
 
   const { etaInMinutes, totalFees, quoteRate } =
