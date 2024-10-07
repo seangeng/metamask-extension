@@ -20,7 +20,7 @@ import { createDeepEqualSelector } from '../../selectors/util';
 import { getProviderConfig } from '../metamask/metamask';
 import { SwapsTokenObject } from '../../../shared/constants/swaps';
 import { BridgeState } from './bridge';
-import { DUMMY_QUOTES_APPROVAL } from './dummy-quotes';
+import { DummyQuotesWithApproval } from './dummy-quotes';
 
 export type BridgeAppState = {
   metamask: NetworkState & { bridgeState: BridgeControllerState } & {
@@ -152,5 +152,5 @@ export const getIsBridgeTx = createDeepEqualSelector(
 );
 
 export const getQuotes = (state: BridgeAppState) => {
-  return DUMMY_QUOTES_APPROVAL;
+  return DummyQuotesWithApproval.ETH_11_USDC_TO_ARB;
 };
