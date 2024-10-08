@@ -12,7 +12,7 @@ enum SortOrder {
 }
 
 const MAXIMUM_ETA_SECONDS = 60 * 60; // 1 hour
-const MAXIMUM_RETURN_VALUE_DIFFERENCE_PERCENTAGE = 0.8; // if a quote returns in x less return than the best quote, ignore it
+const MAXIMUM_RETURN_VALUE_DIFFERENCE_PERCENTAGE = 0.8; // if a quote returns in x times less return than the best quote, ignore it
 
 const useBridgeQuotes = () => {
   const { quotes } = useSelector(getBridgeQuotes);
@@ -27,7 +27,7 @@ const useBridgeQuotes = () => {
     );
   }, [quotes]);
 
-  const { toAmounts, gasFees, relayerFees } = useBridgeAmounts();
+  const { toAmounts, gasFees, relayerFees, swapRates } = useBridgeAmounts();
 
   // Returns {[requestId]: toAmount - gasFees - relayerFees } in fiat
   const adjustedReturnByRequestId = useMemo(() => {
@@ -108,11 +108,12 @@ const useBridgeQuotes = () => {
 
   return {
     recommendedQuote,
-    toAmount: toAmount,
+    toAmount,
     sortedQuotes: sortedRequestIds.map(
       (requestId) => quotesByRequestId[requestId],
     ),
     setSortOrder,
+    quoteMetadata: { toAmounts, gasFees, relayerFees, swapRates },
   };
 };
 

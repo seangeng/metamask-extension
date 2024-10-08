@@ -14,15 +14,35 @@ import MascotBackgroundAnimation from '../../swaps/mascot-background-animation/m
 import { QuoteInfoRow } from './quote-info-row';
 import { BridgeQuotesModal } from './bridge-quotes-modal';
 import useBridgeQuotes from '../../../hooks/bridge/useBridgeQuotes';
+import { getCurrentCurrency } from '../../../selectors';
+import { getNativeCurrency } from '../../../ducks/metamask/metamask';
 
 export const BridgeQuoteCard = () => {
   const t = useI18nContext();
-  const { recommendedQuote } = useBridgeQuotes();
+  const {
+    recommendedQuote,
+    quoteMetadata: { gasFees, relayerFees, swapRates },
+  } = useBridgeQuotes();
 
   const { isLoading } = useSelector(getBridgeQuotes);
 
-  const { etaInMinutes, totalFees, quoteRate } =
-    getQuoteDisplayData(recommendedQuote);
+  const currency = useSelector(getCurrentCurrency);
+  const ticker = useSelector(getNativeCurrency);
+
+  const recommendedSwapRate = recommendedQuote?.quote.requestId
+    ? swapRates[recommendedQuote.quote.requestId]
+    : undefined;
+  const { etaInMinutes, totalFees } = getQuoteDisplayData(
+    ticker,
+    currency,
+    recommendedQuote,
+    recommendedQuote?.quote.requestId
+      ? gasFees[recommendedQuote.quote.requestId]
+      : undefined,
+    recommendedQuote?.quote.requestId
+      ? relayerFees[recommendedQuote.quote.requestId]
+      : undefined,
+  );
 
   const secondsUntilNextRefresh = useCountdownTimer();
 
@@ -36,7 +56,7 @@ export const BridgeQuoteCard = () => {
     );
   }
 
-  return etaInMinutes && totalFees && quoteRate ? (
+  return etaInMinutes && totalFees && recommendedSwapRate ? (
     <Box className="quote-card">
       <BridgeQuotesModal
         isOpen={showAllQuotes}
@@ -52,7 +72,10 @@ export const BridgeQuoteCard = () => {
           tooltipText={t('bridgeTimingTooltipText')}
           description={t('bridgeTimingMinutes', [etaInMinutes])}
         />
-        <QuoteInfoRow label={t('quoteRate')} description={quoteRate} />
+        <QuoteInfoRow
+          label={t('quoteRate')}
+          description={recommendedSwapRate}
+        />
         <QuoteInfoRow
           label={t('totalFees')}
           tooltipText={t('bridgeTotalFeesTooltipText')}
