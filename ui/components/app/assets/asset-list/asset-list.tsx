@@ -213,6 +213,7 @@ const AssetList = ({ onClickAsset, showTokensLinks }: AssetListProps) => {
         isNativeCurrency
         isStakeable={isStakeable}
         showPercentage
+        chainId={chainId}
       />
       <TokenList
         tokens={tokensWithBalances}

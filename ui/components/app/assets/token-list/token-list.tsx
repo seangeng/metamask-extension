@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import TokenCell from '../token-cell';
 import { useI18nContext } from '../../../../hooks/useI18nContext';
 import { Box } from '../../../component-library';
@@ -8,6 +9,7 @@ import {
   JustifyContent,
 } from '../../../../helpers/constants/design-system';
 import { TokenWithBalance } from '../asset-list/asset-list';
+import { getMultichainCurrentChainId } from '../../../../selectors/multichain';
 
 type TokenListProps = {
   onTokenClick: (arg: string) => void;
@@ -21,6 +23,7 @@ export default function TokenList({
   loading = false,
 }: TokenListProps) {
   const t = useI18nContext();
+  const chainId = useSelector(getMultichainCurrentChainId);
 
   if (loading) {
     return (
@@ -39,7 +42,11 @@ export default function TokenList({
   return (
     <div>
       {tokens.map((tokenData, index) => (
-        <TokenCell key={index} {...tokenData} onClick={onTokenClick} />
+        <TokenCell
+          key={index}
+          {...{ ...tokenData, chainId }}
+          onClick={onTokenClick}
+        />
       ))}
     </div>
   );
