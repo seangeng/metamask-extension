@@ -751,7 +751,6 @@ export const fetchTokenExchangeRates = async (
   chainId,
 ) => {
   try {
-    console.log('====fetchTokenExchangeRates');
     return await fetchTokenContractExchangeRates({
       tokenPricesService: new CodefiTokenPricesServiceV2(),
       nativeCurrency,
