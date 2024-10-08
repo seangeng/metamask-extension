@@ -117,7 +117,6 @@ export const ConnectPage: React.FC<ConnectPageProps> = ({
           onSelectChainIds={setSelectedChainIds}
           selectedAccountAddresses={selectedAccountAddresses}
           selectedChainIds={selectedChainIds}
-          activeTabOrigin={activeTabOrigin}
           isConnectFlow
         />
       </Content>

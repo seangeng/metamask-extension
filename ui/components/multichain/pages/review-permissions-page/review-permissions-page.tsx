@@ -197,7 +197,6 @@ export const ReviewPermissions = () => {
               onSelectChainIds={handleSelectChainIds}
               selectedAccountAddresses={connectedAccountAddresses}
               selectedChainIds={connectedChainIds}
-              activeTabOrigin={activeTabOrigin}
             />
           ) : (
             <NoConnectionContent />
