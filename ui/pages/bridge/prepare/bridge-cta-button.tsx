@@ -41,12 +41,12 @@ export const BridgeCTAButton = () => {
     <Button
       data-testid="bridge-cta-button"
       onClick={() => {
-        // if (isTxSubmittable) {
-        console.log('bridge CTA button clicked');
-        dispatch(submitBridgeTransaction(history));
-        // }
+        if (isTxSubmittable) {
+          console.log('bridge CTA button clicked');
+          dispatch(submitBridgeTransaction(history));
+        }
       }}
-      // disabled={!isTxSubmittable}
+      disabled={!isTxSubmittable}
     >
       {label}
     </Button>
