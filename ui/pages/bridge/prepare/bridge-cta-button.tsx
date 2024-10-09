@@ -42,7 +42,6 @@ export const BridgeCTAButton = () => {
       data-testid="bridge-cta-button"
       onClick={() => {
         if (isTxSubmittable) {
-          console.log('bridge CTA button clicked');
           dispatch(submitBridgeTransaction(history));
         }
       }}
