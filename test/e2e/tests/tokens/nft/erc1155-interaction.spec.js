@@ -7,7 +7,6 @@ const {
   unlockWallet,
   WINDOW_TITLES,
   defaultGanacheOptions,
-  largeDelayMs,
 } = require('../../../helpers');
 const { SMART_CONTRACTS } = require('../../../seeder/smart-contracts');
 const FixtureBuilder = require('../../../fixture-builder');
@@ -110,7 +109,9 @@ describe('ERC1155 NFTs testdapp interaction', function () {
           WINDOW_TITLES.ExtensionInFullScreenView,
           windowHandles,
         );
-        await driver.delay(largeDelayMs);
+        await driver.findClickableElement(
+          '[data-testid="account-overview__nfts-tab"]',
+        );
         await driver.clickElement('[data-testid="account-overview__nfts-tab"]');
         await driver.clickElement('[data-testid="nft-item"]');
       },
